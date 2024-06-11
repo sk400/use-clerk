@@ -24,18 +24,22 @@ export default function RootLayout({ children }) {
           <header>
             <div className="flex items-center justify-between p-5">
               <h1 className="text-4xl font-bold">LOGO</h1>
+              {/* Content to show when user is signed out */}
               <SignedOut>
                 <div className="flex item-center space-x-5">
                   <SignUpButton mode="modal" />
                   <SignInButton mode="modal" />
-                  {/* Add your header menu */}
                 </div>
               </SignedOut>
+              {/* Content to show when user is signed in. */}
               <SignedIn>
+                {/* Add your header menu */}
+                {/* Custom signOut button. You can customise it */}
                 <SignOutButton redirectUrl="/" />
               </SignedIn>
             </div>
           </header>
+          {/* Main content */}
           <main>{children}</main>
         </body>
       </html>
