@@ -1,5 +1,13 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +18,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <header>
+            <div className="flex items-center justify-between p-5">
+              <h1 className="text-4xl font-bold">LOGO</h1>
+              <SignedOut>
+                <div className="flex item-center space-x-5">
+                  <SignUpButton mode="modal" />
+                  <SignInButton mode="modal" />
+                  {/* Add your header menu */}
+                </div>
+              </SignedOut>
+              <SignedIn>
+                <SignOutButton redirectUrl="/" />
+              </SignedIn>
+            </div>
+          </header>
+          <main>{children}</main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
